@@ -1,0 +1,21 @@
+*** Settings ***
+Library    SeleniumLibrary
+Library    selenium
+Resource    ../TextData/Resources.robot
+# Library    DataDriver    ../TextData/Data.xlsx    sheet_name=Sheet1
+
+
+
+Suite Setup    Opening a browser
+Suite Teardown    tearing
+Test Template    Steps for datadriven
+
+*** Test Cases ***
+LoginTestWithExcel using ${Inputdatafromexcel}
+
+*** Keywords ***
+Steps for datadriven
+    closing x mark pop up in a flipkart
+    [Arguments]    ${Inputdatafromexcel}
+    Input text data    ${Inputdatafromexcel}    
+    # clickOnSearchSymbol

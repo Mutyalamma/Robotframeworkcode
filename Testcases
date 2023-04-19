@@ -1,0 +1,58 @@
+*** Settings ***
+
+Resource    ../Keywords/keywords.robot
+Library    SeleniumLibrary
+   
+
+
+
+# Library    DataDriver    ../Textdata/Input Text Data.xlsx sheet_name=sheet1
+
+
+Suite Setup    Open Browser    ${url}    ${browser}
+Suite Teardown    Close Browser
+
+*** Test Cases ***
+Tc1: Closing The Popup In Flipkart website
+    [Tags]    Sanity
+    [Setup]    Log To Console    ${tc1}
+    Given Maximize Browser Window
+    Then Close The Popup
+    [Teardown]    Log To Console    ${td1}
+Tc2: Mouse Over On Fashion ans Select the Men's T- shirts in Flipkart Website
+    [Tags]    Regression
+    [Setup]    Log To Console    ${tc2}
+    Given Mouse Over on Fashion
+    Then Scroll Into The Required Item
+    [Teardown]    Log To Console    ${td2}
+Tc3: Click on Sizechart For More Information
+    [Tags]    Sizechart
+    [Setup]    Log To Console    ${tc3}
+    Given Clicking On Size Chart
+    [Teardown]    Log To Console    ${td3}
+Tc4: Sizechart Iteration
+    [Tags]    Iteration
+    [Setup]    Log To Console    ${tc4}
+    Given Verifying Sizechart Iteration
+    When Click On X Mark In Size Chart
+    [Teardown]    Log To Console    ${td4}
+
+Tc5: Verifying text of S Size
+    [Tags]    Assert
+    [Setup]    Log To Console    ${tc5}
+    Given Mouse Over on S Size and Get Text Of It
+    When Performing Assert on S size
+    Then Adding the Item InTo The Cart
+    [Teardown]    Log To Console    ${td5}
+# Tc6: Performing Datadriven using ${Text}
+#     [Template]    Text Passing
+#     [Setup]    Log To Console    ${tc6}
+#     [Teardown]    Log To Console    ${td6} 
+Tc6: Performing Data Driven on Search Box
+    ${Text1}    Read Data from Excel    ${CURDIR}${/}..\\Textdata\\Input Text Data.xlsx   Sheet1    2    1
+    Log To Console    ${Text1}
+    ${Text2}    Read Data from Excel    ${CURDIR}${/}..\\Textdata\\Input Text Data.xlsx   Sheet1    3    1
+    Log To Console    ${Text2}
+    ${Text3}    Read Data from Excel    ${CURDIR}${/}..\\Textdata\\Input Text Data.xlsx   Sheet1    4    1
+    Log To Console    ${Text3}
+    Text Data Passing For Searchbox    ${Text1}      

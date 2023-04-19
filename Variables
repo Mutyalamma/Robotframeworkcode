@@ -1,0 +1,58 @@
+
+
+*** Variables ***
+
+${url}    https://www.flipkart.com/
+${browser}    chrome
+
+#closing the popup(X)mark
+${closingPopup}    //button[@class='_2KpZ6l _2doB4z']
+
+# Tc1 setup
+${tc1}    Testcase Pop Up Setup Successfully
+${td1}    Testcase Pop Up Teardown Completely
+
+# xpath for product items
+${fashion}    xpath:(//div[@class='xtXmba'])[3]
+${men's T-Shirts}    xpath:(//a[@class='_6WOcW9 _3YpNQe'])[2]
+${reuiredItem}    xpath://div[@data-id='TSHG5ZRJFBK3SJ6Q']
+
+# Tc2 setup
+${tc2}    Mouse Over On Fashion Setup Successfully
+${td2}    Mouse Over On Fashion Teardown Completely
+
+# xpath for sizechart
+${sizeChartImage}    xpath://span[contains(text(),'Size Chart')]
+${tableRow}    xpath://table[@class='_2WObml']//tbody//tr
+${tableColumn}    xpath://table[@class='_2WObml']//tbody//tr[1]//td
+${expectedChest}    39
+# ${Expecteddata}    xpath://table[@class='_2WObml']//tr[3]//td[1]
+
+${expectedLength}    27
+${closeSizeChart}    xpath://button[@class='_2KpZ6l _1KAjNd']
+#Tc3 setup
+${tc3}    Click On Size Chart Setup Successfully
+${td3}    Click On Size Chart Teardown Completely
+#Tc4 Setup
+${tc4}    Iteration of SizeChart Setup Successfully
+${td4}    Iteration Of SizeChart Teardown Completely
+#xpath for size S
+${mouseOverOnSSize}    xpath:(//li[@class='_3V2wfe _31hAvz'])[7]
+${mouseOverOnSSizeToGetText}    xpath:(//div[@class='_3Oikkn _3_ezix _2KarXJ _31hAvz'])[7]
+${clickOnSSize}    xpath:(//li[@class='_3V2wfe _31hAvz'])[7]
+${addToCart}    xpath://button[@class='_2KpZ6l _2U9uOA _3v1-ww']
+
+#Tc5 setup
+${tc5}    Mouse Over On S Size Setup Successfully
+${td5}    The Text Of Mouse Over Of Element Completed
+#Tc6 Setup
+${tc6}    Passing The Text Data to The Search box Setup Successfully
+${td6}    Passing the Text data to the serach box Teardown Completely
+#xpath for searchbox
+${searchBox}    xpath://input[@title='Search for products, brands and more']
+${clickOnSearchSymbol}    xpath://button[@type='submit']
+# xpath for coinswitch
+${SkipAll}    xpath://div[contains(text(),'Skip All')]
+${Done}    xpath://div[contains(text(),'Done')]
+${Clickon X mark}    xpath://img[@class='tw-absolute tw-right-[-10px] tw-top-[-10px] tw-cursor-pointer']
+# btc xpath:(//div[@class='false tw-text-xxs tw-text-gray-600 tw-font-medium'])[1]

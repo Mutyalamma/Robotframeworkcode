@@ -1,0 +1,26 @@
+*** Settings ***
+Library    SeleniumLibrary
+Library    DataDriver    ../TextData/Input Text Data.xlsx   sheet_name=sheet2
+Resource    ../TextData/variables.robot
+Test Template    Data Passing
+
+
+Suite Setup    Open Browser    ${url}    ${browser}
+Suite Teardown    Close Browser
+
+*** Test Cases ***
+Verifying The Data passing into the Search box    ${Text}
+
+*** Keywords ***
+Search
+    Maximize Browser Window
+    Wait Until Element Is Visible    ${closingPopupinFlipkart}
+    Click Button    ${closingPopupinFlipkart}
+
+Data Passing
+    Search
+    [Arguments]    ${Text}
+    Log To Console    ${Text}
+    Set Selenium Timeout    5s
+    Input Text    ${searchBox}    ${Text}
+    Click Button    ${clickOnSearchSymbol}

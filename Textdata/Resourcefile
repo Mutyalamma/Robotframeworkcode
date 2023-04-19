@@ -1,0 +1,28 @@
+
+*** Settings ***
+Library    SeleniumLibrary
+
+*** Variables ***
+${url}    https://www.flipkart.com/
+${browser}    chrome
+${closingPopupinFlipkart}    //button[@class='_2KpZ6l _2doB4z']
+${searchBox}    xpath://input[@title='Search for products, brands and more']
+${clickOnSearchSymbol}    xpath://button[@type='submit']
+
+
+*** Keywords ***
+Opening a browser
+    Open Browser    ${url}    ${browser}
+    Maximize Browser Window
+tearing
+    Close All Browsers
+closing x mark pop up in a flipkart
+    Wait Until Element Is Visible    ${closingPopupinFlipkart}
+    Click Button    ${closingPopupinFlipkart}
+
+Input text data 
+    [Arguments]    ${Inputdatafromexcel}
+    Input Text    ${searchBox}    ${Inputdatafromexcel}
+
+clickOnSearchSymbol
+    Click Button    ${clickOnSearchSymbol}

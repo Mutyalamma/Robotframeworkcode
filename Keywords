@@ -1,0 +1,91 @@
+*** Settings ***
+
+Library    SeleniumLibrary
+Resource    ../Variables/variables.robot
+
+
+
+*** Keywords ***
+Close The Popup
+    Click Button    ${closingPopup}
+
+Mouse Over on Fashion 
+    Mouse Over    ${fashion}
+    Wait Until Element Is Visible    ${men's T-Shirts}    
+    Click Element    ${men's T-Shirts}
+Scroll Into The Required Item
+    
+    Wait Until Element Is Visible    ${reuiredItem}    5s
+    Scroll Element Into View    ${reuiredItem} 
+    Click Element   ${reuiredItem}  
+
+Clicking On Size Chart 
+    ${WindowHandles}    Get Window Handles
+    Switch Window    ${WindowHandles}[1]
+
+    Wait Until Element Is Visible    ${sizeChartImage}    
+    Click Element    ${sizeChartImage}
+Click On X Mark In Size Chart
+    Click Button    ${closeSizeChart}
+Mouse Over on S Size and Get Text Of It
+    Wait Until Element Is Visible    ${mouseOverOnSSize}
+    Mouse Over    ${mouseOverOnSSize}
+    ${textForSSize}=    Get Text    ${mouseOverOnSSize}
+    Log To Console    ${textForSSize}
+Performing Assert on S size
+    Wait Until Element Contains    ${mouseOverOnSSizeToGetText}    Chest 37 inch
+Adding the Item InTo The Cart
+    Wait Until Element Is Visible    ${clickOnSSize}    
+    Click Element   ${clickOnSSize}
+    Set Selenium Implicit Wait    5s
+    Click Button    ${Add To Cart}
+
+Verifying Sizechart Iteration
+    ${rowCount} =    Get Element Count   ${tableRow}
+    ${columnCount} =    Get Element Count   ${tableColumn} 
+    Log To Console    ${rowcount}
+    Log To Console    ${columnCount}
+
+    FOR    ${rowIndex}    IN RANGE    1    ${rowCount} + 1      
+         ${rowHeader}=    Get Text    xpath://table[@class='_2WObml']/tbody/tr[${rowIndex}]/td[2]
+        Run Keyword If    '${rowHeader}' == '${expectedChest}'    Exit For Loop
+        
+    END
+    Log To Console    ${rowIndex}
+    Log To Console    ${rowHeader}
+    
+    FOR    ${columnIndex}    IN RANGE    1    ${columnCount} + 1       
+         ${Size}=    Get Text    xpath://table[@class='_2WObml']/tbody/tr[${rowIndex}]/td[${columnIndex}]
+             
+        IF    "${Size}" == "${expectedLength}"
+             ${Length}=    Get Text    xpath://table[@class='_2WObml']/tbody/tr[${rowIndex}]/td
+                Log To Console    ${Length}
+                Log To Console    ${Size}
+        ELSE
+                Log To Console    ${Size}
+        END
+        Log To Console    ${columnIndex}
+        Run Keyword If    '${Size}' == '${expectedLength}'    Exit For Loop
+      
+    END
+      
+Text Data Passing For Searchbox
+    ${windowSwitching}    Get Window Handles
+    Switch Window    ${windowSwitching}[0]
+    [Arguments]    ${Text}
+    Input Text    ${searchBox}    ${Text}
+    Sleep    3s
+    Click Button    ${clickOnSearchSymbol}
+Read Data from Excel
+    [Arguments]    ${filepath}    ${sheetname}    ${rownum}    ${colnum}
+    Open Excel Document    ${filepath}   1
+    Get Sheet    ${sheetname}
+    ${data}    Read Excel Cell    ${rownum}    ${colnum}
+    [Return]    ${data}
+    Close Current Excel Document
+
+closingpopup
+    Maximize Browser Window
+    Click Button    ${closingPopup}
+
+

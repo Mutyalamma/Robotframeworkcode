@@ -1,0 +1,21 @@
+*** Settings ***
+Library    DataDriver   ../Textdata/Input Text Data.xlsx    sheet_name=Sheet1
+Resource    ../Keywords/keywords.robot
+Test Template    Read All The Data from Excel
+
+Suite Setup    Open Browser    ${url}    ${browser}
+Suite Teardown    Close Browser
+
+*** Test Cases ***   
+Verifying the Data    ${Text}
+
+
+*** Keywords ***
+Read All The Data from Excel
+    closingpopup
+    [Arguments]    ${Text}
+    Log To Console    ${Text}
+    Set Selenium Timeout    5s
+    Input Text    ${searchBox}    ${Text}
+    
+    Click Button    ${clickOnSearchSymbol}
